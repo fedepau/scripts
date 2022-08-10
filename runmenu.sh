@@ -1,7 +1,7 @@
 #!/bin/bash
 
 application=$(
-	xlsclients | sed -e 's/.*VirtualBox/foobar virtualbox/g' -e 's/.*soffice/foobar libreoffice/g' | grep -v "plugin-container" | cut -d " " -f3 | dmenu -i -g 1 -l 10 -p "Switch to:" $@)
+	xlsclients | sed -e 's/.*VirtualBox/foobar virtualbox/g' -e 's/.*soffice/foobar libreoffice/g' | grep -v "plugin-container" | cut -d " " -f3 | dmenu -l 10 -p "Switch to:" $@)
 
 case $application in
 	gimp | truecrypt)
