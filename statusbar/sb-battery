@@ -9,29 +9,29 @@ case $battery in
 		if [ "$capacity" -gt "75" ]; then
 			status="🔋"
 		elif [ "$capacity" -gt "50" ]; then
-			status=" "
+			status=""
 		elif [ "$capacity" -gt "25" ]; then
-			status=" "
+			status=""
 		elif [ "$capacity" -gt "10" ]; then
-			status=" "
+			status=""
 		else
-			status=" "
+			status=""
 		fi ;;
 	"Charging")
 		if [ "$capacity" -gt "75" ]; then
 			status="🔌🔋"
 		elif [ "$capacity" -gt "50" ]; then
-			status="🔌 "
+			status="🔌"
 		elif [ "$capacity" -gt "25" ]; then
-			status="🔌 "
+			status="🔌"
 		elif [ "$capacity" -gt "10" ]; then
-			status="🔌 "
+			status="🔌"
 		else
-			status="🔌 "
+			status="🔌"
 		fi ;;
-	"Not charging") status=" " ;;
+	"Not charging") status="" ;;
 	"Unknown") status="" ;;
 	*) exit 1 ;;
 esac
 
-echo "$status" "$capacity%"
+echo "^C14^^B13^^C0^^B14^ $status $capacity% ^d^"

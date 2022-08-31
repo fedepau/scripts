@@ -12,4 +12,4 @@ else
         echo " muted" && exit
 fi
 
-echo "$icon$vol%"
+echo "^C6^^B5^^B6^ ^C0^^B6^$icon$vol% ^d^"

@@ -2,4 +2,4 @@
 
 cpu=$(top -b -n1 | grep "Cpu(s)" | awk '{print $2+$4}')
 
-echo "" "$cpu%"
+echo "^C2^^B9^^C0^^B2^  $cpu% ^d^"

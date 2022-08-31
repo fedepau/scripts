@@ -2,4 +2,4 @@
 
 date=$(date '+%d %b %Y (%a)')
 
-echo "" "$date"
+echo "^C12^^B11^^C0^^B12^  $date ^d^"

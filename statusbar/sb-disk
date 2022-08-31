@@ -2,4 +2,4 @@
 
 disk=$(df -lh | awk  '{if ($6 == "/") {print $5}}')
 
-echo "" "$disk"
+echo "^C5^^B4^^C0^^B5^  $disk ^d^"
