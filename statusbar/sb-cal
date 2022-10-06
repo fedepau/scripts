@@ -1,5 +1,9 @@
 #!/bin/bash
 
+case $BUTTON in
+	1) notify-send " Calendar module " "\- Shows current date." ;;
+esac
+
 date=$(date '+%d %b %Y (%a)')
 
-echo "^C12^^B11^^C0^^B12^  $date ^d^"
+echo "^C12^^B0^[ $date]^d^"

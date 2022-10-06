@@ -1,5 +1,12 @@
 #!/bin/bash
 
-brightness=$(xbacklight -get | awk -F. '{print $1}')
+case $BUTTON in
+	1) notify-send " Brightness module " "\- Shows screen brightness.
+- Mouse wheel: adjust brightness." ;;
+    4) xbacklight -inc 5 ;;
+	5) xbacklight -dec 5 ;;
+esac
 
-echo "^C11^^B6^^C0^^B11^  $brightness% ^d^"
+brightness="$(xbacklight -get | awk -F. '{print $1}')"
+
+echo "^C11^^B0^[ $brightness%]^d^"

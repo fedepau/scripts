@@ -1,37 +1,46 @@
-#!/bin/bash
+#!/bin/sh
 
-battery=$(cat /sys/class/power_supply/BAT0/status)
-capacity=$(cat /sys/class/power_supply/BAT0/capacity)
+# TODO: implement support for multiple batteries
 
-case $battery in
-	"Full") status="⚡" ;;
-	"Discharging")
-		if [ "$capacity" -gt "75" ]; then
-			status="🔋"
-		elif [ "$capacity" -gt "50" ]; then
-			status=""
-		elif [ "$capacity" -gt "25" ]; then
-			status=""
-		elif [ "$capacity" -gt "10" ]; then
-			status=""
-		else
-			status=""
-		fi ;;
-	"Charging")
-		if [ "$capacity" -gt "75" ]; then
-			status="🔌🔋"
-		elif [ "$capacity" -gt "50" ]; then
-			status="🔌"
-		elif [ "$capacity" -gt "25" ]; then
-			status="🔌"
-		elif [ "$capacity" -gt "10" ]; then
-			status="🔌"
-		else
-			status="🔌"
-		fi ;;
-	"Not charging") status="" ;;
-	"Unknown") status="" ;;
-	*) exit 1 ;;
+case $BUTTON in
+	1) notify-send "🔋 Battery module " "\- Shows battery perchentage.
+- Middle click to open htop.
+- Right click to show remamining time." ;;
+	2) setsid -f "st" -e htop ;;
+    3) notify-send "$(acpi -V | grep "Battery 0" | head -1)" ;;
 esac
 
-echo "^C14^^B13^^C0^^B14^ $status $capacity% ^d^"
+for battery in /sys/class/power_supply/BAT*
+do
+    bat="$(cat $battery/status 2>&1)"
+    capacity="$(cat $battery/capacity 2>&1)"
+
+    case $bat in
+    	"Full") status="⚡" ;;
+    	"Discharging")
+    		if [ "$capacity" -gt "75" ]; then
+    			status="🔋"
+    		elif [ "$capacity" -gt "50" ]; then
+    			status=""
+    		elif [ "$capacity" -gt "25" ]; then
+    			status=""
+    		elif [ "$capacity" -gt "10" ]; then
+    			status=""
+    		else
+    			status=""
+    		fi ;;
+    	"Charging")
+            status="🔌" ;;
+    	"Not charging") status="" ;;
+    	"Unknown") status="" ;;
+    	*) exit 1 ;;
+    esac
+    
+    if [ "$capacity" -gt "60" ]; then
+        echo "^C2^^B0^[$status $capacity%]^d^"
+    elif [ "$capacity" -gt "30" ]; then
+        echo "^C3^^B0^[$status $capacity%]^d^"
+    else
+        echo "^C1^^B0^[$status $capacity%]^d^"
+    fi
+done

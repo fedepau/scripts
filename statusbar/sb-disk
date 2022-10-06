@@ -1,5 +1,9 @@
 #!/bin/bash
 
+case $BUTTON in
+    1) notify-send " Disk module" "\- Shows disk usage (/)." ;;
+esac
+
 disk=$(df -lh | awk  '{if ($6 == "/") {print $5}}')
 
-echo "^C5^^B4^^C0^^B5^  $disk ^d^"
+echo "^C5^[ $disk]^d^"

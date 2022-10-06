@@ -1,5 +1,12 @@
-#!/bin/bash
+#/bin/sh
 
-cpu=$(top -b -n1 | grep "Cpu(s)" | awk '{print $2+$4}')
+case $BUTTON in
+	1) notify-send "🖥 CPU module " "\- Shows CPU temperature.
+- Right click to show intensive processes.
+- Middle click to open htop." ;;
+	2) setsid -f "st" -e htop ;;
+	3) notify-send "🖥 CPU hogs" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)\\n(100% per core)" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
 
-echo "^C2^^B9^^C0^^B2^  $cpu% ^d^"
+sensors | awk '/Core 0/ {print "🌡" $3}'

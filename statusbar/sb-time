@@ -2,4 +2,4 @@
 
 time=$(date '+%H:%M')
 
-echo "^C13^^B12^^C0^^B13^  $time ^d^"
+echo "^C13^^B0^[ $time]^d^"

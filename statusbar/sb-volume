@@ -1,6 +1,13 @@
 #!/bin/bash
 
-[ $(pamixer --get-mute) = true ] && echo " muted" && exit
+case $BUTTON in
+	1) notify-send "🔊 Volume module " "\- Shows speakers volume.
+- Mouse wheel: adjust volume." ;;
+    4) pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ +5% ;;
+    5) pactl set-sink-mute @DEFAULT_SINK@ false && pactl set-sink-volume @DEFAULT_SINK@ -5% ;;
+esac
+
+[ $(pamixer --get-mute) = true ] && echo "^C6^^B0^[ muted]^d^" && exit
 
 vol="$(pamixer --get-volume)"
 
@@ -9,7 +16,7 @@ if [ "$vol" -gt "50" ]; then
 elif [ "$vol" -gt "0" ]; then
 	icon="🔈 "
 else
-        echo " muted" && exit
+        echo "^C6^^B0^[ muted]^d^" && exit
 fi
 
-echo "^C6^^B5^^B6^ ^C0^^B6^$icon$vol% ^d^"
+echo "^C6^^B0^[$icon$vol%]^d^"

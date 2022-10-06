@@ -1,6 +1,12 @@
 #!/bin/bash
 
+case $BUTTON in
+	1) notify-send " Memory module " "\- Shows RAM usage.
+- Middle click: open htop.
+- Right click: show RAM intensive processes" ;;
+	2) setsid -f "st" -e htop ;;
+esac
 
 memory=$(free -h | awk '/^Mem/ { print $3"/"$2 }' | sed s/i//g)
 
-echo "^C3^^B2^^C0^^B3^  $memory ^d^"
+echo "^C3^^B0^[ $memory]^d^"

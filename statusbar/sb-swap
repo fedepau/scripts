@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 swap=$(free -h | awk '/^Swap/ { print $3"/"$2 }' | sed s/i//g)
 
-echo "^C4^^B3^^C0^^B4^  $swap ^d^"
+echo "^C4^^B0^[ $swap]^d^"
