@@ -3,15 +3,11 @@
 # TODO: implement support for multiple batteries
 
 case $BUTTON in
-	1) notify-send "🔋 Battery module " "\- Shows battery perchentage.
-- Middle click to open htop.
-- Right click to show remamining time." ;;
-	2) setsid -f "st" -e htop ;;
+	1) notify-send "🔋 Battery module" "\- Shows battery perchentage.
+- Right click: show status and remamining time." ;;
     3) notify-send "$(acpi -V | grep "Battery 0" | head -1)" ;;
 esac
 
-for battery in /sys/class/power_supply/BAT*
-do
     bat="$(cat $battery/status 2>&1)"
     capacity="$(cat $battery/capacity 2>&1)"
 

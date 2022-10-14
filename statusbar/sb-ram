@@ -3,8 +3,9 @@
 case $BUTTON in
 	1) notify-send " Memory module " "\- Shows RAM usage.
 - Middle click: open htop.
-- Right click: show RAM intensive processes" ;;
+- Right click: show RAM intensive processes." ;;
 	2) setsid -f "st" -e htop ;;
+	3) notify-send "🖥 RAM hogs" "$(ps axch -o cmd:15,%mem --sort=-%mem | head)\\n(100% RAM)" ;;
 esac
 
 memory=$(free -h | awk '/^Mem/ { print $3"/"$2 }' | sed s/i//g)

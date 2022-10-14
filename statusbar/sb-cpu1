@@ -1,0 +1,27 @@
+#!/bin/bash
+
+cpu=$(top -b -n1 | grep "Cpu(s)" | awk '{print $2+$4}')
+temp=$(acpi -V | grep -m 1 "Thermal 1" | awk '{print $4}')
+temp_int=$(printf "%.0f" $temp)
+
+case $BUTTON in
+    1) notify-send "🖥 CPU module (core 1)" "\- Shows CPU temperature (core 1).
+- Click to show intensive processes.
+- Middle click to open htop." ;;
+	2) setsid -f "st" -e htop ;;
+	3) notify-send "🖥 CPU hogs" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)\\n(100% per core)" ;;
+esac
+
+if [ "$temp_int" -gt "90" ]; then
+    echo "^C1^^B0^[ $cpu% $temp]^d^" && exit
+elif [ "$temp_int" -gt "80" ]; then
+    echo "^C1^^B0^[ $cpu% $temp]^d^" && exit
+elif [ "$temp_int" -gt "70" ]; then
+    echo "^C3^^B0^[ $cpu% $temp]^d^" && exit
+elif [ "$temp_int" -gt "60" ]; then
+    echo "^C2^^B0^[ $cpu% $temp]^d^" && exit
+elif [ "$temp_int" -gt "0" ]; then
+    echo "^C2^^B0^[ $cpu% $temp]^d^" && exit
+else
+    echo "^C1^^B0^[ $cpu% ]^d^" && exit
+fi

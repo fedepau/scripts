@@ -1,5 +1,9 @@
 #!/bin/bash
 
+case $BUTTON in
+	1) notify-send " Clock module" "\- Shows current time." ;;
+esac
+
 time=$(date '+%H:%M')
 
 echo "^C13^^B0^[ $time]^d^"

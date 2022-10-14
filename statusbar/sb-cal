@@ -1,7 +1,7 @@
 #!/bin/bash
 
 case $BUTTON in
-	1) notify-send " Calendar module " "\- Shows current date." ;;
+	1) notify-send " Calendar module" "\- Shows current date." ;;
 esac
 
 date=$(date '+%d %b %Y (%a)')

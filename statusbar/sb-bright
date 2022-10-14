@@ -1,7 +1,7 @@
 #!/bin/bash
 
 case $BUTTON in
-	1) notify-send " Brightness module " "\- Shows screen brightness.
+	1) notify-send " Brightness module" "\- Shows screen brightness.
 - Mouse wheel: adjust brightness." ;;
     4) xbacklight -inc 5 ;;
 	5) xbacklight -dec 5 ;;
