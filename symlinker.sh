@@ -9,6 +9,7 @@ read USER
 
 [[ -f "/home/$USER/.local" ]] || mkdir /home/$USER/.local 2>&1 >/dev/null
 [[ -f "/home/$USER/.local/bin" ]] || mkdir /home/$USER/.local/bin 2>&1 >/dev/null
+[[ -f "/home/$USER/.local/bin/scripts" ]] || mkdir /home/$USER/.local/bin 2>&1 >/dev/null
 [[ -f "/home/$USER/.local/bin/statusbar" ]] || mkdir /home/$USER/.local/bin/statusbar 2>&1 >/dev/null
 
 # statusbar
