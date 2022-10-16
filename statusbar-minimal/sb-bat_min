@@ -1,0 +1,34 @@
+#!/bin/sh
+
+case $BUTTON in
+	1) notify-send "🔋 Battery module" "\- Shows battery perchentage.
+- Right click: show status and remamining time." ;;
+    3) notify-send "$(acpi -V | grep "Battery 0" | head -1)" ;;
+esac
+
+battery=/sys/class/power_supply/BAT0
+bat="$(cat $battery/status 2>&1)"
+capacity="$(cat $battery/capacity 2>&1)"
+
+case $bat in
+	"Full") status="⚡" ;;
+	"Discharging")
+		if [ "$capacity" -gt "75" ]; then
+			status="🔋"
+		elif [ "$capacity" -gt "50" ]; then
+			status=""
+		elif [ "$capacity" -gt "25" ]; then
+			status=""
+		elif [ "$capacity" -gt "10" ]; then
+			status=""
+		else
+			status=""
+		fi ;;
+	"Charging")
+        status="🔌" ;;
+	"Not charging") status="" ;;
+	"Unknown") status="" ;;
+	*) exit 1 ;;
+esac
+
+echo "[$status $capacity%]"

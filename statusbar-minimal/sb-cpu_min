@@ -1,0 +1,21 @@
+#!/bin/bash
+
+cpu=$(top -b -n1 | grep "Cpu(s)" | awk '{print $2+$4}')
+temp=$(acpi -V | grep -m 1 "Thermal 0" | awk '{print $4}')
+temp_int=$(printf "%.0f" $temp)
+
+if [ "$temp_int" -gt "90" ]; then
+    therm=""
+elif [ "$temp_int" -gt "80" ]; then
+    therm=""
+elif [ "$temp_int" -gt "70" ]; then
+    therm=""
+elif [ "$temp_int" -gt "60" ]; then
+    therm=""
+elif [ "$temp_int" -gt "0" ]; then
+    therm=""
+else
+    therm=""
+fi
+  
+echo "[ $cpu% $temp]" && exit
