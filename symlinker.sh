@@ -15,7 +15,7 @@ read USER
 #done
 
 # statusbar-minimal
-for script in /home/$USER/.programs/scripts/statusbar-minimal
+for script in $(ls /home/$USER/.programs/scripts/statusbar-minimal)
 do
     ln -s /home/$USER/.programs/scripts/statusbar-minimal/$script /home/$USER/.local/bin/statusbar/$script
 done
