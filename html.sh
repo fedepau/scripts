@@ -1,0 +1,3 @@
+#!/bin/sh
+
+w3m -T text/html -cols $(tput cols) -dump -o display_image=false -o display_link_number=true
