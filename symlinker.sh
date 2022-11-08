@@ -21,3 +21,4 @@ do
 done
 
 ln -s /home/$USER/.programs/scripts/dmenu_run_i /home/$USER/.local/bin/scripts/dmenu_run_i
+ln -s /home/$USER/.programs/scripts/touchpad_toggle.sh /home/$USER/.local/bin/scripts/touchpad_toggle.sh
